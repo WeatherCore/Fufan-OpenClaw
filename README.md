@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🦞 FuFan-OpenClaw
+# 🦞 WeatherCore-OpenClaw
 
 **一个把「记忆」与「技能」都还给文件的透明 AI Agent 系统**
 
@@ -19,15 +19,15 @@
 ---
 
 > ### 💭 它不做平台，只做你的数字副手
-> FuFan-OpenClaw 是一个基于 Python 重构的轻量级 AI Agent 系统，复刻并优化 OpenClaw（原名 Moltbot/Clawdbot）的核心体验。
+> WeatherCore-OpenClaw 是一个基于 Python 重构的轻量级 AI Agent 系统，复刻并优化 OpenClaw（原名 Moltbot/Clawdbot）的核心体验。
 > 没有向量数据库黑盒，没有不可见的提示词魔法 —— **你的每一次对话、Agent 的每一次反思，都是一行人类可读的 Markdown。**
 
 ---
 
 ## ✨ 三大设计支柱
 
-| 🗂️ 文件即记忆 | 🧩 技能即插件 | 🔍 全程透明 |
-|:---:|:---:|:---:|
+|                                                     🗂️ 文件即记忆                                                      |                                              🧩 技能即插件                                               |                                                     🔍 全程透明                                                      |
+| :-------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: |
 | 摒弃不透明的向量数据库，回归最通用的 Markdown/JSON 文件系统。记忆直接躺在 `memory/MEMORY.md` 里，随时打开、随时编辑。 | 遵循 Anthropic Agent Skills 范式，一个文件夹 + 一份 `SKILL.md` 就是一项能力，**拖入即用**，零代码注册。 | System Prompt 拼接逻辑、工具调用链、记忆读写过程全部可见。前端 **Raw Messages 面板**让你实时审视 Agent 的一举一动。 |
 
 ## 🚀 功能全景
@@ -94,15 +94,15 @@ flowchart TB
 
 ## 🛠️ 七大核心工具
 
-| 工具 | 名称 | 能力 | 安全边界 |
-|---|---|---|---|
-| 🖥️ 命令行 | `terminal` | 受限沙箱内执行 Shell 命令 | `root_dir` 限制 + 高危指令黑名单 |
-| 🐍 Python 解释器 | `python_repl` | 逻辑计算、数据处理、脚本执行 | 独立交互环境 |
-| 🌐 网页获取 | `fetch_url` | 抓取 URL 并清洗为 Markdown | 自动剔除 HTML 噪音，省 Token |
-| 📄 文件读取 | `read_file` | 读取本地文件（技能机制的核心依赖） | 锁定项目根目录，严禁越界 |
-| 🔎 知识库检索 | `search_knowledge_base` | BM25 + 向量混合检索 PDF/MD/TXT | 索引持久化于 `storage/` |
-| 🧭 浏览器操控 | `browser_use` | Playwright 驱动的表单填写、导航、信息提取 | 独立浏览器实例 |
-| 🔍 联网搜索 | `tavily_search` | 获取训练截止后的实时资讯与数据 | 需要 Tavily Key |
+| 工具            | 名称                    | 能力                                      | 安全边界                         |
+| --------------- | ----------------------- | ----------------------------------------- | -------------------------------- |
+| 🖥️ 命令行        | `terminal`              | 受限沙箱内执行 Shell 命令                 | `root_dir` 限制 + 高危指令黑名单 |
+| 🐍 Python 解释器 | `python_repl`           | 逻辑计算、数据处理、脚本执行              | 独立交互环境                     |
+| 🌐 网页获取      | `fetch_url`             | 抓取 URL 并清洗为 Markdown                | 自动剔除 HTML 噪音，省 Token     |
+| 📄 文件读取      | `read_file`             | 读取本地文件（技能机制的核心依赖）        | 锁定项目根目录，严禁越界         |
+| 🔎 知识库检索    | `search_knowledge_base` | BM25 + 向量混合检索 PDF/MD/TXT            | 索引持久化于 `storage/`          |
+| 🧭 浏览器操控    | `browser_use`           | Playwright 驱动的表单填写、导航、信息提取 | 独立浏览器实例                   |
+| 🔍 联网搜索      | `tavily_search`         | 获取训练截止后的实时资讯与数据            | 需要 Tavily Key                  |
 
 ## 🧬 Agent 是如何"学习"技能的？
 
@@ -183,16 +183,16 @@ npm run dev
 
 ### 🔑 环境变量一览（`backend/.env`）
 
-| 变量 | 必填 | 默认值 | 说明 |
-|---|:---:|---|---|
-| `DEEPSEEK_API_KEY` | ✅ | — | 对话模型密钥 |
-| `DEEPSEEK_MODEL` | — | `deepseek-chat` | 模型名称 |
-| `DEEPSEEK_BASE_URL` | — | `https://api.deepseek.com` | 可替换为任意 OpenAI 兼容网关 |
-| `OPENAI_API_KEY` | RAG 模式 | — | Embedding 向量化服务密钥 |
-| `OPENAI_BASE_URL` | — | — | Embedding 服务地址 |
-| `EMBEDDING_MODEL` | — | `text-embedding-3-small` | 向量模型 |
-| `TAVILY_API_KEY` | 可选 | — | 启用 `tavily_search` 联网搜索 |
-| `OPENWEATHER_API_KEY` | 可选 | — | 启用 `get_weather` 技能 |
+| 变量                  |   必填   | 默认值                     | 说明                          |
+| --------------------- | :------: | -------------------------- | ----------------------------- |
+| `DEEPSEEK_API_KEY`    |    ✅     | —                          | 对话模型密钥                  |
+| `DEEPSEEK_MODEL`      |    —     | `deepseek-chat`            | 模型名称                      |
+| `DEEPSEEK_BASE_URL`   |    —     | `https://api.deepseek.com` | 可替换为任意 OpenAI 兼容网关  |
+| `OPENAI_API_KEY`      | RAG 模式 | —                          | Embedding 向量化服务密钥      |
+| `OPENAI_BASE_URL`     |    —     | —                          | Embedding 服务地址            |
+| `EMBEDDING_MODEL`     |    —     | `text-embedding-3-small`   | 向量模型                      |
+| `TAVILY_API_KEY`      |   可选   | —                          | 启用 `tavily_search` 联网搜索 |
+| `OPENWEATHER_API_KEY` |   可选   | —                          | 启用 `get_weather` 技能       |
 
 > 💡 最低可用配置只需一个 `DEEPSEEK_API_KEY` —— RAG、联网搜索、天气技能均可后置开启。
 
@@ -200,7 +200,7 @@ npm run dev
 <summary><b>📁 完整目录结构</b>（点击展开）</summary>
 
 ```
-fufan-openclaw/
+WeatherCore-OpenClaw/
 ├── backend/                    # FastAPI + LangChain/LangGraph
 │   ├── app.py                  # 入口文件（端口 8002）
 │   ├── config.py               # JSON 配置管理（RAG 模式等）
@@ -239,24 +239,24 @@ fufan-openclaw/
 <details>
 <summary><b>🔌 API 一览</b>（点击展开）</summary>
 
-| 方法 | 端点 | 功能 |
-|---|---|---|
-| `POST` | `/api/chat` | 核心对话（SSE 流式：`token` / `tool_start` / `tool_end` / `retrieval` / `canvas` / `title` / `done` / `error`） |
-| `GET` | `/api/files?path=` | 读取文件内容 |
-| `POST` | `/api/files` | 保存文件修改 |
-| `GET` | `/api/sessions` | 会话列表 |
-| `POST` | `/api/sessions` | 创建会话 |
-| `PUT` | `/api/sessions/{id}` | 重命名会话 |
-| `DELETE` | `/api/sessions/{id}` | 删除会话 |
-| `GET` | `/api/sessions/{id}/messages` | 原始消息（含 System Prompt） |
-| `GET` | `/api/sessions/{id}/history` | 会话历史（含 tool_calls） |
-| `POST` | `/api/sessions/{id}/compress` | 压缩 50% 历史为摘要 |
-| `GET` | `/api/tokens/session/{id}` | 会话 Token 统计 |
-| `POST` | `/api/tokens/files` | 文件列表 Token 统计 |
-| `GET` | `/api/config/rag-mode` | 查询 RAG 模式 |
-| `PUT` | `/api/config/rag-mode` | 切换 RAG 模式 |
-| `GET` | `/api/skills` | 技能列表 |
-| `DELETE` | `/api/skills/{name}` | 删除技能 |
+| 方法     | 端点                          | 功能                                                                                                            |
+| -------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `POST`   | `/api/chat`                   | 核心对话（SSE 流式：`token` / `tool_start` / `tool_end` / `retrieval` / `canvas` / `title` / `done` / `error`） |
+| `GET`    | `/api/files?path=`            | 读取文件内容                                                                                                    |
+| `POST`   | `/api/files`                  | 保存文件修改                                                                                                    |
+| `GET`    | `/api/sessions`               | 会话列表                                                                                                        |
+| `POST`   | `/api/sessions`               | 创建会话                                                                                                        |
+| `PUT`    | `/api/sessions/{id}`          | 重命名会话                                                                                                      |
+| `DELETE` | `/api/sessions/{id}`          | 删除会话                                                                                                        |
+| `GET`    | `/api/sessions/{id}/messages` | 原始消息（含 System Prompt）                                                                                    |
+| `GET`    | `/api/sessions/{id}/history`  | 会话历史（含 tool_calls）                                                                                       |
+| `POST`   | `/api/sessions/{id}/compress` | 压缩 50% 历史为摘要                                                                                             |
+| `GET`    | `/api/tokens/session/{id}`    | 会话 Token 统计                                                                                                 |
+| `POST`   | `/api/tokens/files`           | 文件列表 Token 统计                                                                                             |
+| `GET`    | `/api/config/rag-mode`        | 查询 RAG 模式                                                                                                   |
+| `PUT`    | `/api/config/rag-mode`        | 切换 RAG 模式                                                                                                   |
+| `GET`    | `/api/skills`                 | 技能列表                                                                                                        |
+| `DELETE` | `/api/skills/{name}`          | 删除技能                                                                                                        |
 
 </details>
 
@@ -264,21 +264,21 @@ fufan-openclaw/
 
 ## 🖥️ 前端三页 · IDE 风格
 
-| 页面 | 路由 | 布局 |
-|---|---|---|
-| 💬 **对话页** | `/` | 会话列表 ｜ 聊天区 + 思维链 ｜ Raw Messages / Canvas 可滑出面板 |
-| 🧠 **记忆页** | `/memory` | 文件卡片列表 ｜ Monaco 编辑器 + AI 优化对比 |
-| ⚡ **技能页** | `/skills` | 技能卡片库 + 技能商店 ｜ Monaco 编辑器 |
+| 页面         | 路由      | 布局                                                            |
+| ------------ | --------- | --------------------------------------------------------------- |
+| 💬 **对话页** | `/`       | 会话列表 ｜ 聊天区 + 思维链 ｜ Raw Messages / Canvas 可滑出面板 |
+| 🧠 **记忆页** | `/memory` | 文件卡片列表 ｜ Monaco 编辑器 + AI 优化对比                     |
+| ⚡ **技能页** | `/skills` | 技能卡片库 + 技能商店 ｜ Monaco 编辑器                          |
 
 ## 🧩 内置技能
 
-| 技能 | 说明 |
-|---|---|
-| `get_weather` | 获取指定城市实时天气 |
-| `pdf_to_markdown` | PDF 转结构化 Markdown |
-| `docx` | Word 文档创建、编辑与分析 |
-| `long_document_workflow` | 长文档分节生成工作流 |
-| `storyboard_generator` | 电影级分镜脚本生成器 |
+| 技能                     | 说明                      |
+| ------------------------ | ------------------------- |
+| `get_weather`            | 获取指定城市实时天气      |
+| `pdf_to_markdown`        | PDF 转结构化 Markdown     |
+| `docx`                   | Word 文档创建、编辑与分析 |
+| `long_document_workflow` | 长文档分节生成工作流      |
+| `storyboard_generator`   | 电影级分镜脚本生成器      |
 
 ## ➕ 编写你自己的技能
 
@@ -328,6 +328,6 @@ description: 一句话说清触发场景 —— Agent 靠它判断何时匹配�
 
 📜 本项目基于 [MIT License](./LICENSE) 开源 · 文档见 [PRD](./FuFan-OpenClaw%20%E5%BC%80%E5%8F%91%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3%20(PRD).md)
 
-**FuFan-OpenClaw** · 由 [赋范空间](https://fufan.ai) 倾心打造 🦞
+**WeatherCore-OpenClaw** · 
 
 </div>
